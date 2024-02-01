@@ -40,7 +40,6 @@ public class Solution {
                     result += 1000;
                     break;
                 default:
-                    // Handle invalid characters if needed
                     break;
             }
         }
