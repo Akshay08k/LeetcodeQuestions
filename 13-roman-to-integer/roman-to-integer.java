@@ -1,47 +1,24 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class Solution {
     public int romanToInt(String s) {
+        Map<Character, Integer> romanValues = new HashMap<>();
+        romanValues.put('I', 1);
+        romanValues.put('V', 5);
+        romanValues.put('X', 10);
+        romanValues.put('L', 50);
+        romanValues.put('C', 100);
+        romanValues.put('D', 500);
+        romanValues.put('M', 1000);
+
         int result = 0;
 
         for (int i = 0; i < s.length(); ++i) {
-            char currentChar = s.charAt(i);
-
-            switch (currentChar) {
-                case 'I':
-                    if (i < s.length() - 1 && (s.charAt(i + 1) == 'V' || s.charAt(i + 1) == 'X')) {
-                        result -= 1;
-                    } else {
-                        result += 1;
-                    }
-                    break;
-                case 'V':
-                    result += 5;
-                    break;
-                case 'X':
-                    if (i < s.length() - 1 && (s.charAt(i + 1) == 'L' || s.charAt(i + 1) == 'C')) {
-                        result -= 10;
-                    } else {
-                        result += 10;
-                    }
-                    break;
-                case 'L':
-                    result += 50;
-                    break;
-                case 'C':
-                    if (i < s.length() - 1 && (s.charAt(i + 1) == 'D' || s.charAt(i + 1) == 'M')) {
-                        result -= 100;
-                    } else {
-                        result += 100;
-                    }
-                    break;
-                case 'D':
-                    result += 500;
-                    break;
-                case 'M':
-                    result += 1000;
-                    break;
-                default:
-                 
-                    break;
+            if (i < s.length() - 1 && romanValues.get(s.charAt(i)) < romanValues.get(s.charAt(i + 1))) {
+                result -= romanValues.get(s.charAt(i));
+            } else {
+                result += romanValues.get(s.charAt(i));
             }
         }
 
